@@ -11,6 +11,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 // import { useCreateUserAccount, useSignInAccount } from '@/lib/react-query/queries';
 import { SignupValidation } from '@/lib/validation';
+import { createUserAccount } from '@/lib/appwrite/api';
 // import { useUserContext } from '@/context/AuthContext';
 
 const SignupForm = () => {
@@ -28,6 +29,11 @@ const SignupForm = () => {
             password: '',
         },
     });
+
+    async function onSubmit(values: z.infer<typeof SignupValidation>) {
+        const newUser = await createUserAccount(values);
+        console.log(newUser);
+    }
 
     // Queries
     // const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } = useCreateUserAccount();
@@ -83,10 +89,7 @@ const SignupForm = () => {
                     To use snapgram, Please enter your details
                 </p>
 
-                <form
-                    // onSubmit={form.handleSubmit(handleSignup)}
-                    className="flex flex-col gap-5 w-full mt-4"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
                     <FormField
                         control={form.control}
                         name="name"
