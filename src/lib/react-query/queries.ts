@@ -5,7 +5,7 @@ import {
     createUserAccount,
     signInAccount,
     // getCurrentUser,
-    // signOutAccount,
+    signOutAccount,
     // getUsers,
     // createPost,
     // getPostById,
