@@ -1,13 +1,13 @@
 import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
 
-// import { QUERY_KEYS } from '@/lib/react-query/queryKeys';
+import { QUERY_KEYS } from '@/lib/react-query/queryKeys';
 import {
     createUserAccount,
     signInAccount,
     // getCurrentUser,
     signOutAccount,
     // getUsers,
-    // createPost,
+    createPost,
     // getPostById,
     // updatePost,
     // getUserPosts,
@@ -15,7 +15,7 @@ import {
     // likePost,
     // getUserById,
     // updateUser,
-    // getRecentPosts,
+    getRecentPosts,
     // getInfinitePosts,
     // searchPosts,
     // savePost,
@@ -74,24 +74,24 @@ export const useSignOutAccount = () => {
 //     });
 // };
 
-// export const useGetRecentPosts = () => {
-//     return useQuery({
-//         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-//         queryFn: getRecentPosts,
-//     });
-// };
+export const useGetRecentPosts = () => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+        queryFn: getRecentPosts,
+    });
+};
 
-// export const useCreatePost = () => {
-//     const queryClient = useQueryClient();
-//     return useMutation({
-//         mutationFn: (post: INewPost) => createPost(post),
-//         onSuccess: () => {
-//             queryClient.invalidateQueries({
-//                 queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-//             });
-//         },
-//     });
-// };
+export const useCreatePost = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (post: INewPost) => createPost(post),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+            });
+        },
+    });
+};
 
 // export const useGetPostById = (postId?: string) => {
 //     return useQuery({
