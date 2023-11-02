@@ -35,26 +35,26 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
     // Query
     const { mutateAsync: createPost, isLoading: isLoadingCreate } = useCreatePost();
-    // const { mutateAsync: updatePost, isLoading: isLoadingUpdate } = useUpdatePost();
+    const { mutateAsync: updatePost, isLoading: isLoadingUpdate } = useUpdatePost();
 
     // Handler
     const handleSubmit = async (value: z.infer<typeof PostValidation>) => {
         // ACTION = UPDATE
-        // if (post && action === 'Update') {
-        //     const updatedPost = await updatePost({
-        //         ...value,
-        //         postId: post.$id,
-        //         imageId: post.imageId,
-        //         imageUrl: post.imageUrl,
-        //     });
+        if (post && action === 'Update') {
+            const updatedPost = await updatePost({
+                ...value,
+                postId: post.$id,
+                imageId: post.imageId,
+                imageUrl: post.imageUrl,
+            });
 
-        //     if (!updatedPost) {
-        //         toast({
-        //             title: `${action} post failed. Please try again.`,
-        //         });
-        //     }
-        //     return navigate(`/posts/${post.$id}`);
-        // }
+            if (!updatedPost) {
+                toast({
+                    title: `${action} post failed. Please try again.`,
+                });
+            }
+            return navigate(`/posts/${post.$id}`);
+        }
 
         // ACTION = CREATE
         const newPost = await createPost({
